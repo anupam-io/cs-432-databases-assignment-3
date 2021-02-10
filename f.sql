@@ -1,9 +1,6 @@
--- Find out the names of all batsmen 
--- who scored more than 100 runs and,
--- their runs scored. Sort names alphabetically.
--- (if multiple entries of the same player, 
--- show the one with highest runs)
-
+-- Find out the top 3 batsmen whose
+-- [number of runs scored/number of matches played]
+-- is the best in edition 2.
 
 drop table if exists t1;
 create table t1 as (
@@ -37,9 +34,8 @@ create table t3 as (
 
 drop table if exists t4;
 create table t4 as (
-    select * from t3
-    where runs > 99
-    
+    select striker, sum(runs) as total_runs from t3
+    group by striker
 )
 ;
 -- select * from t4;
@@ -47,15 +43,17 @@ create table t4 as (
 
 drop table if exists t5;
 create table t5 as (
-    select P.player_name, t4.runs from t4
-    inner join player as P
-    where t4.striker = P.player_id
-    order by  P.player_name
+    select player_id, count(match_id) 
+    as total_matches from player_match
+    group by player_id
 )
 ;
--- select * from t5
+-- select * from t5;
 
 
-select distinct(player_name), max(runs) from t5
-group by player_name
+select t4.total_runs/t5.total_matches as avg from t4
+inner join t5
+where t4.striker = t5.player_id
+order by avg desc
+limit 3
 ;
