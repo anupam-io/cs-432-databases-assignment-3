@@ -2,16 +2,13 @@
 -- best average(no. of runs given/wickets taken) in edition 5.
 -- IPL 2012
 
-drop table if exists t1;
-create table t1 as (
+create view t1 as (
     select match_id, over_id, ball_id, innings_no, bowler from ball_by_ball
 )
 ;
 -- select * from t1;    
 
-
-drop table if exists t2;
-create table t2 as (
+create view t2 as (
     select t1.bowler, t1.match_id, t1.over_id, t2.runs_scored  from t1
     inner join batsman_scored as t2
     where t1.match_id = t2.match_id
@@ -21,17 +18,14 @@ create table t2 as (
 );
 -- select * from t2;
 
-drop table if exists t3;
-create table t3 as (
+create view t3 as (
     select bowler, match_id, over_id, sum(runs_scored) as runs from t2
     group by bowler, match_id, over_id
 )
 ;
 -- select * from t3;
 
-
-drop table if exists t4;
-create table t4 as(
+create view t4 as(
     select bowler,  avg(runs) as avg from t3
     group by bowler
     order by avg asc
@@ -45,3 +39,5 @@ inner join (
 )as t5
 where t4.avg = t5.avg
 ;
+
+drop view if exists t1,t2,t3,t4,t5,t6;

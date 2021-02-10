@@ -5,16 +5,13 @@
 -- show the one with highest runs)
 
 
-drop table if exists t1;
-create table t1 as (
+create view t1 as (
     select match_id, over_id, ball_id, innings_no, striker  from ball_by_ball
 )
 ;
 -- select * from t1;
 
-
-drop table if exists t2;
-create table t2 as (
+create view t2 as (
     select striker, B.match_id, runs_scored from batsman_scored as B
     inner join t1
     where B.match_id = t1.match_id
@@ -25,18 +22,14 @@ create table t2 as (
 ; 
 -- select * from t2;
 
-
-drop table if exists t3;
-create table t3 as (
+create view t3 as (
     select striker, sum(runs_scored) as runs from t2
     group by striker, match_id
 )
 ;
 -- select * from t3;
 
-
-drop table if exists t4;
-create table t4 as (
+create view t4 as (
     select * from t3
     where runs > 99
     
@@ -44,9 +37,7 @@ create table t4 as (
 ;
 -- select * from t4;
 
-
-drop table if exists t5;
-create table t5 as (
+create view t5 as (
     select P.player_name, t4.runs from t4
     inner join player as P
     where t4.striker = P.player_id
@@ -59,3 +50,5 @@ create table t5 as (
 select distinct(player_name), max(runs) from t5
 group by player_name
 ;
+
+drop view if exists t1,t2,t3,t4,t5,t6;
