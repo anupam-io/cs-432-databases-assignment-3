@@ -1,7 +1,6 @@
 drop database X;
 create database X;
 use X;
-
 set global local_infile=true;
 
 create table team(
