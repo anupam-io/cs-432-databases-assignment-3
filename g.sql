@@ -68,7 +68,7 @@ create table t6 as (
 
 
 select country_name, avg(avg) as avg from 
-t6 natural join player
+t6 inner join player
 where t6.striker = player.player_id
 group by country_name
 ;
