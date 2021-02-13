@@ -147,3 +147,25 @@ lines terminated by '\n'
 ignore 3 rows
 ;
 -- -- select * from ball_by_ball;
+
+
+-- Helping view for multiple queries
+create view bat_run as (
+    select striker as player_id, match_id, sum(runs_scored) as total_runs 
+    from (
+        select striker, B.match_id, runs_scored from batsman_scored as B
+        inner join (
+            select match_id, over_id, ball_id, innings_no, striker  from ball_by_ball
+        )as t1
+        where B.match_id = t1.match_id
+        and B.over_id = t1.over_id
+        and B.ball_id = t1.ball_id
+        and B.innings_no = t1.innings_no
+    ) as t2
+    group by striker, match_id
+)
+;
+
+select * from bat_run
+limit 10
+;

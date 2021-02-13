@@ -2,17 +2,12 @@
 -- the frequency of their “caught” out in increasing order of the number of “caught”.
 -- If a tie occurs, sort names alphabetically.
 
-create view t1 as (
+select t1.cnt as no_of_times, player.player_name from (
     select player_out, count(kind_out) as cnt from wicket_taken
     where kind_out = "caught"
     group by player_out
-)
-;
-
-select t1.cnt, player.player_name from t1
+)as t1
 inner join player
 where t1.player_out = player.player_id
 order by t1.cnt asc, player.player_name asc 
 ;
-
-drop view if exists t1,t2,t3,t4,t5,t6;

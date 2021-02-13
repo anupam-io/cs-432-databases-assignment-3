@@ -1,3 +1,5 @@
 https://www.mysqltutorial.org/import-csv-file-mysql-table/
 
-`sudo mysql --local-infile=1`
+```
+sudo mysql --local-infile=1
+```
