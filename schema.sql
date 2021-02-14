@@ -156,7 +156,7 @@ create view bat_run as (
     from (
         select striker, B.match_id, runs_scored from batsman_scored as B
         inner join (
-            select match_id, over_id, ball_id, innings_no, striker  from ball_by_ball
+            select match_id, over_id, ball_id, innings_no, striker from ball_by_ball
         )as t1
         where B.match_id = t1.match_id
         and B.over_id = t1.over_id
@@ -166,14 +166,3 @@ create view bat_run as (
     group by striker, match_id
 )
 ;
-
-source a.sql;
-source b.sql;
-source c.sql;
-source d.sql;
-source e.sql;
-source f.sql;
-source g.sql;
-source h.sql;
-source i.sql;
-source j.sql;

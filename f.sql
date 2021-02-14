@@ -12,7 +12,6 @@ select player_name, avg from (
             group by player_id
         ) as t3
         group by player_id
-
     )as t4
     inner join (
         select player_id, count(player_match.match_id)

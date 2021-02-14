@@ -7,7 +7,7 @@
 select distinct(player_name), max(total_runs) as total_runs from (
     select P.player_name, t4.total_runs from (
         select * from bat_run
-        where total_runs > 99
+        where total_runs > 100
     )as t4
     inner join player as P
     where t4.player_id = P.player_id
