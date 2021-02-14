@@ -4,8 +4,8 @@ use X;
 set global local_infile=true;
 
 create table team(
-    team_id int(10) unsigned,
-    team_name varchar(50)
+    team_id int(10) unsigned primary key,
+    team_name varchar(50) not null
 );
 load data local infile "data/team.csv" 
 into table team
@@ -19,11 +19,11 @@ ignore 1 rows
 
 create table player(
     player_id int(10) unsigned primary key,
-    player_name varchar(50),
-    dob date,
-    batting_hand varchar(50),
-    bowling_skill varchar(50),
-    country_name varchar(50)
+    player_name varchar(50) not null,
+    dob date not null,
+    batting_hand varchar(50) not null,
+    bowling_skill varchar(50) not null,
+    country_name varchar(50) not null
 );
 load data local infile "data/player.csv" 
 into table player
@@ -35,10 +35,10 @@ ignore 2 rows
 
 
 create table player_match(
-    match_id int(10) unsigned,
-    player_id int(10) unsigned,
-    role varchar(50),
-    team_id int(10) unsigned
+    match_id int(10) unsigned not null,
+    player_id int(10) unsigned not null,
+    role varchar(50) not null,
+    team_id int(10) unsigned not null
 );
 load data local infile "data/player_match.csv" 
 into table player_match
@@ -51,12 +51,12 @@ ignore 2 rows
 
 
 create table wicket_taken(
-    match_id int(10) unsigned,
-    over_id int(10) unsigned,
-    ball_id int(10) unsigned,
-    player_out int(10) unsigned,
-    kind_out varchar(50),
-    innings_no int(10) unsigned
+    match_id int(10) unsigned not null,
+    over_id int(10) unsigned not null,
+    ball_id int(10) unsigned not null,
+    player_out int(10) unsigned not null,
+    kind_out varchar(50) not null,
+    innings_no int(10) unsigned not null
 );
 load data local infile "data/wicket_taken.csv" 
 into table wicket_taken
@@ -69,19 +69,19 @@ ignore 2 rows
 
 
 create table matches(
-    match_id int(10),
-    team_1 int(10),
-    team_2 int(10),
-    match_date date,
-    season_id int(10),
-    venue varchar(50),
-    toss_winner int(10),
-    toss_decision varchar(50),
-    win_type varchar(50),
-    win_margin int(10),
-    outcome_type varchar(50),   
-    match_winner int(10),
-    man_of_the_match int(10)
+    match_id int(10) not null,
+    team_1 int(10) not null,
+    team_2 int(10) not null,
+    match_date date not null,
+    season_id int(10) not null,
+    venue varchar(50) not null,
+    toss_winner int(10) not null,
+    toss_decision varchar(50) not null,
+    win_type varchar(50) not null,
+    win_margin int(10) not null,
+    outcome_type varchar(50) not null, 
+    match_winner int(10) not null,
+    man_of_the_match int(10) not null
 )
 ;
 load data local infile "data/match.csv" 
@@ -95,12 +95,12 @@ ignore 2 rows
 
 
 create table extra_runs(
-    match_id int(10),
-    over_id int(10),
-    ball_id int(10),
-    extra_type varchar(50),
-    extra_runs int(10),
-    innings_no int(10)
+    match_id int(10) not null,
+    over_id int(10) not null,
+    ball_id int(10) not null,
+    extra_type varchar(50) not null,
+    extra_runs int(10) not null,
+    innings_no int(10) not null
 );
 load data local infile "data/extra_runs.csv" 
 into table extra_runs
@@ -112,11 +112,11 @@ ignore 2 rows
 
 
 create table batsman_scored(
-    match_id int(10),
-    over_id int(10),
-    ball_id int(10),
-    runs_scored int(10),
-    innings_no int(10)
+    match_id int(10) not null,
+    over_id int(10) not null,
+    ball_id int(10) not null,
+    runs_scored int(10) not null,
+    innings_no int(10) not null
 );
 load data local infile "data/batsman_scored.csv" 
 into table batsman_scored
@@ -129,16 +129,16 @@ ignore 2 rows
 
 
 create table ball_by_ball(
-    match_id int(10),
-    over_id int(10),
-    ball_id int(10),
-    innings_no int(10),
-    team_batting int(10),
-    team_bowling int(10),
-    striker_batting_position int(10),
-    striker int(10),
-    non_striker int(10),
-    bowler int(10)
+    match_id int(10) not null,
+    over_id int(10) not null,
+    ball_id int(10) not null,
+    innings_no int(10) not null,
+    team_batting int(10) not null,
+    team_bowling int(10) not null,
+    striker_batting_position int(10) not null,
+    striker int(10) not null,
+    non_striker int(10) not null,
+    bowler int(10) not null
 );
 load data local infile "data/ball_by_ball.csv" 
 into table ball_by_ball
@@ -147,6 +147,7 @@ lines terminated by '\n'
 ignore 3 rows
 ;
 -- -- select * from ball_by_ball;
+
 
 
 -- Helping view for multiple queries
@@ -165,3 +166,14 @@ create view bat_run as (
     group by striker, match_id
 )
 ;
+
+source a.sql;
+source b.sql;
+source c.sql;
+source d.sql;
+source e.sql;
+source f.sql;
+source g.sql;
+source h.sql;
+source i.sql;
+source j.sql;
