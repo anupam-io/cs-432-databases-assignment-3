@@ -165,7 +165,3 @@ create view bat_run as (
     group by striker, match_id
 )
 ;
-
-select * from bat_run
-limit 10
-;
