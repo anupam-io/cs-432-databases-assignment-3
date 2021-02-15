@@ -28,14 +28,18 @@ select P.player_name, t.average from (
     )as W inner join (
         select bowler, sum(runs_scored) as runs from (
         select B.bowler, R.runs_scored  from (
-            (select B.* from batsman_scored as B
-            inner join my_matches as M 
-            where B.match_id = M.match_id)
+            (
+                select B.* from batsman_scored as B
+                inner join my_matches as M 
+                where B.match_id = M.match_id
+            )
             union
-            (select E.match_id, E.over_id, E.ball_id, E.innings_no, E.extra_runs as runs
-            from extra_runs as E
-            inner join my_matches as M
-            where E.match_id = M.match_id)
+            (
+                select E.match_id, E.over_id, E.ball_id, E.innings_no, E.extra_runs as runs
+                from extra_runs as E
+                inner join my_matches as M
+                where E.match_id = M.match_id
+            )
         )as R
         inner join my_balls as B
         where R.match_id = B.match_id

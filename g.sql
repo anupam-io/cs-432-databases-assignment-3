@@ -3,7 +3,7 @@
 -- the highest country batting 
 -- average( ∑ battingaverage / Totalnumber of players in that country)
 
-select country_name, avg(avg) as avg from (
+select country_name as country, avg(avg) as average from (
     select t4.player_id, t4.all_runs/t5.total_matches as avg from (
         select player_id, sum(total_runs) as all_runs
         from bat_run
@@ -19,6 +19,6 @@ select country_name, avg(avg) as avg from (
 inner join player
 where t6.player_id = player.player_id
 group by country_name
-order by avg desc
+order by average desc
 limit 3
 ;

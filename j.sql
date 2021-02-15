@@ -1,7 +1,7 @@
 -- List all captains who scored 
 -- more than 50 runs in edition 3.
 
-select * from (
+select P.player_name, B.all_runs as runs from (
     select B.player_id, sum(B.total_runs) as all_runs from (
         select bat_run.player_id, total_runs from bat_run
         inner join matches as M
@@ -16,5 +16,8 @@ select * from (
     where B.player_id = t.player_id
     group by B.player_id
 ) as B
+inner join player as P
 where B.all_runs > 50
+and B.player_id = P.player_id
+order by P.player_name asc
 ;

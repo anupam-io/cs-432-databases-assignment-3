@@ -5,7 +5,7 @@
 
 drop view if exists indian_players;
 create view indian_players as (
-    select P.player_id, P.player_name, t4.all_runs from (
+    select P.player_name, t4.all_runs from (
         select player_id, sum(total_runs) as all_runs from bat_run
         group by player_id
     )as t4
