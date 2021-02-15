@@ -152,7 +152,7 @@ ignore 3 rows
 
 -- Helping view for multiple queries
 create view bat_run as (
-    select striker as player_id, match_id, sum(runs_scored) as total_runs 
+    select match_id, striker as player_id, sum(runs_scored) as total_runs 
     from (
         select striker, B.match_id, runs_scored from batsman_scored as B
         inner join (
