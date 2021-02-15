@@ -20,4 +20,8 @@ inner join player as P
 where B.all_runs > 50
 and B.player_id = P.player_id
 order by P.player_name asc
+INTO OUTFILE '/var/lib/mysql-files/10.csv'
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
 ;

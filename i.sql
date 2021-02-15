@@ -15,4 +15,9 @@ create view indian_players as (
 )
 ;
 
-select * from indian_players;
+select * from indian_players
+INTO OUTFILE '/var/lib/mysql-files/9.csv'
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+;

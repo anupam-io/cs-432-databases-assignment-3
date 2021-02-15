@@ -15,4 +15,9 @@ select distinct(player_name), max(total_runs) as total_runs from (
 )as t5
 group by player_name
 order by player_name
+INTO OUTFILE '/var/lib/mysql-files/5.csv'
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+;
 ;

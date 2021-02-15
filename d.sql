@@ -55,6 +55,11 @@ select P.player_name, t.average from (
 )as t
 inner join player as P
 where t.bowler = P.player_id
+INTO OUTFILE '/var/lib/mysql-files/4.csv'
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+;
 ;
 
 drop view if exists my_matches, my_balls;

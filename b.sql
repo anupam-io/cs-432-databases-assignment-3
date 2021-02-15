@@ -12,4 +12,9 @@ left join (
 ) as t
 on t.player_out = P.player_id
 order by count asc, P.player_name asc
+INTO OUTFILE '/var/lib/mysql-files/2.csv'
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+;
 ;

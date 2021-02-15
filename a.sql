@@ -35,6 +35,10 @@ select P.player_name, t1.over_id from (
 inner join player as P
 where t1.bowler = P.player_id
 order by t1.over_id asc
+INTO OUTFILE '/var/lib/mysql-files/1.csv'
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
 ;
 
 drop view if exists t;

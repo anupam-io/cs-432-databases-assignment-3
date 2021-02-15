@@ -27,4 +27,9 @@ select player_name, avg from (
 )as t6 
 inner join player
 where t6.player_id = player.player_id
+INTO OUTFILE '/var/lib/mysql-files/6.csv'
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+;
 ;

@@ -19,6 +19,11 @@ inner join (
     select max(cnt) as cnt from t
 ) as t4
 where t.cnt = t4.cnt
+INTO OUTFILE '/var/lib/mysql-files/3.csv'
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+;
 ;
 
 drop view if exists t;

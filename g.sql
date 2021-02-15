@@ -21,4 +21,9 @@ where t6.player_id = player.player_id
 group by country_name
 order by average desc
 limit 3
+INTO OUTFILE '/var/lib/mysql-files/7.csv'
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+;
 ;
