@@ -1,5 +1,7 @@
+## IPL Database with MySQL
+
 ## How to run?
- - `sudo mysql --local-infile=1;`
+ - `mysql --local-infile=1 -u root -p`
  - `source test.sql;`
 
 ## MySQL constraints 
